@@ -8,11 +8,6 @@ import {
   Validators,
 } from '@angular/forms';
 
-type NewType = ValidationErrors | null;
-{
-  return null;
-}
-
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -20,7 +15,10 @@ type NewType = ValidationErrors | null;
 })
 export class RegistrationComponent implements OnInit {
   userAddForm: FormGroup = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    name: new FormControl('', [
+      Validators.required,
+      this.customNameValidator(),
+    ]),
     address: new FormControl('', [Validators.required]),
     country: new FormControl('', [Validators.required]),
     subscription: new FormControl(true, [Validators.required]),
@@ -40,20 +38,22 @@ export class RegistrationComponent implements OnInit {
       const min3Char = control.value
         .split(' ')
         .every((namePart: string) => namePart.length >= 3);
-
-      console.log(control);
       return hasSpace && min3Char ? null : { customNameInvalid: true };
     };
   }
+
   get name() {
     return this.userAddForm.get('name');
   }
+
   get address() {
     return this.userAddForm.get('address');
   }
+
   get country() {
     return this.userAddForm.get('country');
   }
+
   get subscription() {
     return this.userAddForm.get('subscription');
   }

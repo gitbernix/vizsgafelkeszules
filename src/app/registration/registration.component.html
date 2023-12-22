@@ -15,6 +15,13 @@
           >
             Kötelező mező
           </div>
+          <div
+            *ngIf="name?.errors?.['customNameInvalid'] && name?.dirty"
+            class="text-danger small"
+          >
+            A névnek kötelező szóközt tartalmazni és minimum 2x3 karakterből
+            állnia
+          </div>
         </div>
         <div class="col-6">
           <input
@@ -23,6 +30,12 @@
             class="form-control"
             placeholder="Cím"
           />
+          <div
+            *ngIf="address?.invalid && address?.dirty"
+            class="text-danger small"
+          >
+            Kötelező mező
+          </div>
         </div>
         <div class="col-6">
           <select formControlName="country" class="form-control">
@@ -30,6 +43,12 @@
             <option value="uk">Anglia</option>
             <option value="us">Amerika</option>
           </select>
+          <div
+            *ngIf="country?.invalid && country?.dirty"
+            class="text-danger small"
+          >
+            Kötelező mező
+          </div>
         </div>
         <div class="col-12">
           <input type="checkbox" formControlName="subscription" /> Feliratkozás
